@@ -1,0 +1,6 @@
+{
+  "name": "FinanERP - Sistema Financiero",
+  "description": "ERP financiero personal y empresarial para gestión de cuentas, ingresos, gastos, deudas, alquileres y reportes en tiempo real.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
