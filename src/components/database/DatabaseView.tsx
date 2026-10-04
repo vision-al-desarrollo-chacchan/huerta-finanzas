@@ -31,7 +31,7 @@ export const DatabaseView: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'huertafinan_supabase_schema.sql';
+    a.download = 'miluca_supabase_schema.sql';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -40,13 +40,13 @@ export const DatabaseView: React.FC = () => {
 
   const handleDownloadZip = async () => {
     try {
-      const response = await fetch('/huertafinan-completo.zip');
+      const response = await fetch('/miluca-completo.zip');
       if (!response.ok) throw new Error('Error al descargar ZIP');
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'huertafinan-completo.zip';
+      a.download = 'miluca-completo.zip';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

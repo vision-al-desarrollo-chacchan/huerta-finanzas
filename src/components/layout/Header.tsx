@@ -40,18 +40,18 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="sticky top-0 z-40 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800 px-3 sm:px-6 py-2.5">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
         {/* Brand / Logo */}
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-bold text-base shadow-sm">
-            H
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-500 flex items-center justify-center text-white font-extrabold text-xs sm:text-sm tracking-wider shadow-sm shadow-emerald-950">
+            ML
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-base sm:text-lg tracking-tight text-white">
-                Huerta<span className="text-emerald-500">Finan</span>
+            <div className="flex items-center gap-1.5">
+              <span className="font-extrabold text-base sm:text-lg tracking-tight text-white">
+                Mi <span className="text-emerald-400">Luca</span>
               </span>
             </div>
-            <p className="hidden sm:block text-[11px] text-zinc-400 truncate max-w-[200px] lg:max-w-xs">
-              {currentUser?.businessName || currentUser?.name || 'Sistema Financiero'}
+            <p className="hidden sm:block text-[11px] text-zinc-400 font-medium truncate max-w-[200px] lg:max-w-xs">
+              Tu dinero, bajo control
             </p>
           </div>
         </div>

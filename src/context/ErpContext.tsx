@@ -1206,10 +1206,10 @@ export const ErpProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const wb = XLSX.utils.book_new();
 
     const summaryData = [
-      ['SISTEMA HUERTAFINAN - REPORTE EJECUTIVO'],
+      ['MI LUCA - REPORTE DE FINANZAS PERSONALES'],
       ['Generado el:', new Date().toLocaleString()],
-      ['Usuario:', currentUser?.name || 'Administrador'],
-      ['Entidad:', currentUser?.businessName || 'HuertaFinan'],
+      ['Usuario:', currentUser?.name || 'Usuario'],
+      ['Sistema:', 'Mi Luca - Tu dinero, bajo control'],
       ['Moneda Base:', currency],
       [''],
       ['Métrica', 'Monto'],
@@ -1257,12 +1257,12 @@ export const ErpProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const wsTx = XLSX.utils.json_to_sheet(txData);
     XLSX.utils.book_append_sheet(wb, wsTx, 'Movimientos');
 
-    XLSX.writeFile(wb, `Reporte_HuertaFinan_${todayStr}.xlsx`);
+    XLSX.writeFile(wb, `Reporte_MiLuca_${todayStr}.xlsx`);
   };
 
   const getSupabaseSqlSchema = (): string => {
     return `-- ==============================================================================
--- SISTEMA HUERTAFINAN - ESQUEMA RELACIONAL Y RLS PARA SUPABASE POSTGRESQL
+-- SISTEMA MI LUCA - ESQUEMA RELACIONAL Y RLS PARA SUPABASE POSTGRESQL
 -- ==============================================================================
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

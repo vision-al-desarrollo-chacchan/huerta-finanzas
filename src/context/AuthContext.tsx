@@ -40,6 +40,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const savedSession = localStorage.getItem(SESSION_STORAGE_KEY);
       if (savedSession) {
         const user = JSON.parse(savedSession);
+        if (user.businessName === 'Max Inversiones & Servicios E.I.R.L.') {
+          user.businessName = undefined;
+          localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(user));
+        }
         setCurrentUser(user);
       } else {
         // If no user is logged in, auto-login demo user on first visit for zero-friction exploration
@@ -49,7 +53,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             id: 'usr_demo_vip',
             name: 'Fredy Max',
             email: 'fredymax088@gmail.com',
-            businessName: 'Max Inversiones & Servicios E.I.R.L.',
+            businessName: undefined,
             defaultCurrency: 'PEN',
             passwordHash: hashPassword('admin123'),
             avatarColor: '#10b981',
@@ -195,7 +199,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       id: 'usr_demo_vip',
       name: 'Fredy Max',
       email: 'fredymax088@gmail.com',
-      businessName: 'Max Inversiones & Servicios E.I.R.L.',
+      businessName: undefined,
       defaultCurrency: 'PEN',
       passwordHash: hashPassword('admin123'),
       avatarColor: '#10b981',

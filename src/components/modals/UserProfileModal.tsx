@@ -120,7 +120,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
   const handleDownloadZip = async () => {
     try {
       setDownloadStatus('loading');
-      const response = await fetch('/huertafinan-completo.zip');
+      const response = await fetch('/miluca-completo.zip');
       if (!response.ok) {
         throw new Error('Error al descargar el archivo');
       }
@@ -128,7 +128,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
       const blobUrl = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = blobUrl;
-      link.download = 'huertafinan-completo.zip';
+      link.download = 'miluca-completo.zip';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

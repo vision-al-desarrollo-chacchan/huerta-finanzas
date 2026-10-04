@@ -1,29 +1,44 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f172a" />
-      <stop offset="50%" stop-color="#1e293b" />
-      <stop offset="100%" stop-color="#0f766e" />
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="60%" stop-color="#062e26" />
+      <stop offset="100%" stop-color="#047857" />
     </linearGradient>
-    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#34d399" />
       <stop offset="100%" stop-color="#059669" />
     </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="100%" stop-color="#eab308" />
+    </linearGradient>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.4" />
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.5" />
     </filter>
   </defs>
-  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+
+  <!-- App Rounded Base -->
+  <rect width="512" height="512" rx="116" fill="url(#bg)" />
+
+  <!-- Outer subtle border -->
+  <rect x="8" y="8" width="496" height="496" rx="108" fill="none" stroke="#10b981" stroke-opacity="0.25" stroke-width="4" />
+
+  <!-- Monogram ML & Financial Elements -->
   <g filter="url(#shadow)">
-    <!-- Shield / Vault shape -->
-    <path d="M 256 96 L 390 144 C 390 260 330 360 256 400 C 182 360 122 260 122 144 Z" fill="#1e293b" stroke="url(#gold)" stroke-width="12" />
-    <!-- Rising Graph / Coins -->
-    <path d="M 180 290 L 225 240 L 275 270 L 335 190" fill="none" stroke="#34d399" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
-    <polygon points="335,170 345,198 320,195" fill="#34d399" />
-    <!-- Bar charts -->
-    <rect x="180" y="300" width="22" height="40" rx="4" fill="#38bdf8" opacity="0.8" />
-    <rect x="220" y="270" width="22" height="70" rx="4" fill="#38bdf8" opacity="0.8" />
-    <rect x="260" y="290" width="22" height="50" rx="4" fill="#38bdf8" opacity="0.8" />
-    <rect x="300" y="220" width="22" height="120" rx="4" fill="#34d399" />
+    <!-- Central Shield / Coin Badge -->
+    <circle cx="256" cy="256" r="172" fill="#0f172a" stroke="url(#emeraldGrad)" stroke-width="12" />
+    <circle cx="256" cy="256" r="148" fill="#131e30" />
+
+    <!-- Peruvian Sol / Coin subtle outer dotted rim -->
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="6,6" opacity="0.6" />
+
+    <!-- Modern Typography: ML -->
+    <text x="256" y="292" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="132" text-anchor="middle" fill="#ffffff" letter-spacing="-4">
+      M<tspan fill="url(#emeraldGrad)">L</tspan>
+    </text>
+
+    <!-- Small Financial Sparkle / Star above ML -->
+    <path d="M 256 142 L 262 158 L 278 164 L 262 170 L 256 186 L 250 170 L 234 164 L 250 158 Z" fill="url(#goldGrad)" />
   </g>
 </svg>

@@ -1,6 +1,6 @@
 {
-  "name": "FinanERP - Sistema Financiero",
-  "description": "ERP financiero personal y empresarial para gestión de cuentas, ingresos, gastos, deudas, alquileres y reportes en tiempo real.",
+  "name": "Mi Luca - Finanzas Personales",
+  "description": "Tu dinero, bajo control. Sistema de finanzas personales para gestión de cuentas, ingresos, gastos, deudas y presupuestos en el Perú.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

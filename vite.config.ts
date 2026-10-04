@@ -14,9 +14,9 @@ export default defineConfig(() => {
         includeAssets: ['icon.svg', 'apple-touch-icon.png', 'pwa-192x192.png', 'pwa-512x512.png'],
         manifest: {
           id: '/',
-          name: 'HuertaFinan - Sistema Financiero',
-          short_name: 'HuertaFinan',
-          description: 'Sistema ERP financiero personal y empresarial para control de cuentas, gastos, ingresos, deudas y alquileres.',
+          name: 'Mi Luca - Finanzas Personales',
+          short_name: 'Mi Luca',
+          description: 'Tu dinero, bajo control. Sistema de finanzas personales para gestión de cuentas, ingresos, gastos, deudas y presupuestos en el Perú.',
           theme_color: '#0f172a',
           background_color: '#0f172a',
           display: 'standalone',
