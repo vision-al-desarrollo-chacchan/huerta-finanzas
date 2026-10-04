@@ -25,7 +25,6 @@ export const ScheduledPaymentModal: React.FC<ScheduledPaymentModalProps> = ({
   const [recurrence, setRecurrence] = useState<RecurrenceType>('monthly');
   const [status, setStatus] = useState<ScheduledPaymentStatus>('pending');
   const [notes, setNotes] = useState('');
-  const [scope, setScope] = useState<'personal' | 'business'>('business');
   const [error, setError] = useState('');
 
   const expenseCategories = categories.filter(c => c.type === 'expense');
@@ -40,7 +39,6 @@ export const ScheduledPaymentModal: React.FC<ScheduledPaymentModalProps> = ({
       setRecurrence(editItem.recurrence);
       setStatus(editItem.status);
       setNotes(editItem.notes || '');
-      setScope(editItem.scope);
       setError('');
     } else {
       setConcept('');
@@ -49,7 +47,6 @@ export const ScheduledPaymentModal: React.FC<ScheduledPaymentModalProps> = ({
       setRecurrence('monthly');
       setStatus('pending');
       setNotes('');
-      setScope('business');
       setError('');
 
       if (accounts.length > 0 && !accountId) {
@@ -98,7 +95,6 @@ export const ScheduledPaymentModal: React.FC<ScheduledPaymentModalProps> = ({
         recurrence,
         status,
         notes: notes.trim() || undefined,
-        scope,
       });
     } else {
       addScheduledPayment({
@@ -110,7 +106,6 @@ export const ScheduledPaymentModal: React.FC<ScheduledPaymentModalProps> = ({
         recurrence,
         status,
         notes: notes.trim() || undefined,
-        scope,
       });
     }
 

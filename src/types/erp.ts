@@ -72,7 +72,7 @@ export interface Transaction {
   personOrCompany?: string; // Cliente, Proveedor o Persona
   receiptNumber?: string; // Factura, Boleta, Recibo
   notes?: string;
-  scope: 'personal' | 'business';
+  scope?: 'personal' | 'business';
   relatedRentalId?: string;
   relatedDebtId?: string;
   relatedScheduledPaymentId?: string;
@@ -89,7 +89,7 @@ export interface Transfer {
   time: string;
   reference?: string;
   notes?: string;
-  scope: 'personal' | 'business';
+  scope?: 'personal' | 'business';
   createdAt: string;
 }
 
@@ -110,7 +110,7 @@ export interface Debt {
   paidInstallments: number;
   status: DebtStatus;
   notes?: string;
-  scope: 'personal' | 'business';
+  scope?: 'personal' | 'business';
   createdAt: string;
 }
 
@@ -142,7 +142,7 @@ export interface Rental {
   paymentDay: number; // 1-31
   currentMonthStatus: RentalStatus;
   notes?: string;
-  scope: 'personal' | 'business';
+  scope?: 'personal' | 'business';
   createdAt: string;
 }
 
@@ -174,7 +174,7 @@ export interface ScheduledPayment {
   recurrence: RecurrenceType;
   status: ScheduledPaymentStatus;
   notes?: string;
-  scope: 'personal' | 'business';
+  scope?: 'personal' | 'business';
   createdAt: string;
 }
 
@@ -192,6 +192,6 @@ export interface UnifiedMovement {
   categoryColor?: string;
   paymentMethod: PaymentMethod;
   personOrCompany?: string;
-  scope: 'personal' | 'business';
+  scope?: 'personal' | 'business';
   originalId: string;
 }

@@ -94,7 +94,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </h2>
           <p className="text-xs text-slate-400 mt-1">
             {mode === 'login' && 'Tus datos financieros están 100% aislados y seguros'}
-            {mode === 'register' && 'Administra finanzas personales y empresariales en un solo lugar'}
+            {mode === 'register' && 'Gestiona tus finanzas personales con control total e independiente'}
             {mode === 'forgot' && 'Ingresa tu correo y una nueva contraseña'}
           </p>
         </div>

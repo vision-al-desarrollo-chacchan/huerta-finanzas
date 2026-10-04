@@ -18,7 +18,6 @@ export const TransferModal: React.FC<TransferModalProps> = ({ isOpen, onClose })
   const [time, setTime] = useState<string>(getCurrentTimeString());
   const [reference, setReference] = useState<string>('');
   const [notes, setNotes] = useState<string>('');
-  const [scope, setScope] = useState<'personal' | 'business'>('business');
   const [error, setError] = useState<string>('');
 
   if (!isOpen) return null;
@@ -49,7 +48,6 @@ export const TransferModal: React.FC<TransferModalProps> = ({ isOpen, onClose })
       time,
       reference: reference.trim() || undefined,
       notes: notes.trim() || undefined,
-      scope,
     });
 
     if (res.success) {
@@ -111,20 +109,6 @@ export const TransferModal: React.FC<TransferModalProps> = ({ isOpen, onClose })
                 onChange={e => setAmount(e.target.value)}
                 className="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-lg font-bold focus:border-indigo-500 focus:outline-none"
               />
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">
-                Ámbito
-              </label>
-              <select
-                value={scope}
-                onChange={e => setScope(e.target.value as 'personal' | 'business')}
-                className="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-200 text-sm focus:border-indigo-500 focus:outline-none"
-              >
-                <option value="business">Empresarial (Negocio)</option>
-                <option value="personal">Personal (Propias)</option>
-              </select>
             </div>
           </div>
 

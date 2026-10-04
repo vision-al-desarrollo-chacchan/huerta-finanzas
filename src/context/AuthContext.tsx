@@ -8,6 +8,7 @@ interface AuthContextType {
   login: (email: string, password: string) => { success: boolean; error?: string };
   register: (name: string, email: string, password: string, businessName?: string, defaultCurrency?: Currency) => { success: boolean; error?: string };
   resetPassword: (email: string, newPassword: string) => { success: boolean; error?: string };
+  changePassword: (currentPassword: string, newPassword: string) => { success: boolean; error?: string };
   loginDemoUser: () => void;
   logout: () => void;
   updateProfile: (data: Partial<User>) => void;
@@ -161,6 +162,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return { success: true };
   };
 
+  const changePassword = (currentPassword: string, newPassword: string): { success: boolean; error?: string } => {
+    if (!currentUser) {
+      return { success: false, error: 'No hay una sesión activa.' };
+    }
+
+    if (currentUser.passwordHash !== hashPassword(currentPassword)) {
+      return { success: false, error: 'La contraseña actual no es correcta.' };
+    }
+
+    if (newPassword.length < 6) {
+      return { success: false, error: 'La nueva contraseña debe tener mínimo 6 caracteres.' };
+    }
+
+    const newHash = hashPassword(newPassword);
+    const users = getRegisteredUsers();
+    const index = users.findIndex(u => u.id === currentUser.id);
+    if (index >= 0) {
+      users[index].passwordHash = newHash;
+      localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+    }
+
+    const updated = { ...currentUser, passwordHash: newHash };
+    setCurrentUser(updated);
+    localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(updated));
+
+    return { success: true };
+  };
+
   const loginDemoUser = () => {
     const demoUser: User = {
       id: 'usr_demo_vip',
@@ -199,6 +228,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login,
         register,
         resetPassword,
+        changePassword,
         loginDemoUser,
         logout,
         updateProfile,

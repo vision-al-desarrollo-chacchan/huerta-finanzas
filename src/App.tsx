@@ -27,6 +27,7 @@ import { DebtModal } from './components/modals/DebtModal';
 import { RentalModal } from './components/modals/RentalModal';
 import { SupabaseSqlModal } from './components/modals/SupabaseSqlModal';
 import { AuthModal } from './components/auth/AuthModal';
+import { UserProfileModal, UserProfileModalTab } from './components/modals/UserProfileModal';
 import { DebtType, RentalType } from './types/erp';
 
 const MainAppContent: React.FC = () => {
@@ -38,6 +39,12 @@ const MainAppContent: React.FC = () => {
     isOpen: boolean;
     type: MovementModalType;
   }>({ isOpen: false, type: 'expense' });
+
+  // User Profile & Settings Modal State
+  const [userProfileModalState, setUserProfileModalState] = useState<{
+    isOpen: boolean;
+    tab: UserProfileModalTab;
+  }>({ isOpen: false, tab: 'profile' });
 
   // Other Modals state (preserved for backwards-compatibility and granular views)
   const [transactionModalState, setTransactionModalState] = useState<{
@@ -78,6 +85,7 @@ const MainAppContent: React.FC = () => {
         onOpenMovementModal={handleOpenMovementModal}
         onOpenSupabaseModal={() => setIsSupabaseModalOpen(true)}
         onOpenAuthModal={() => setIsAuthModalOpen(true)}
+        onOpenProfileModal={(tab = 'profile') => setUserProfileModalState({ isOpen: true, tab })}
       />
 
       {/* Main Layout Area */}
@@ -233,6 +241,13 @@ const MainAppContent: React.FC = () => {
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
+      />
+
+      <UserProfileModal
+        isOpen={userProfileModalState.isOpen}
+        onClose={() => setUserProfileModalState(prev => ({ ...prev, isOpen: false }))}
+        initialTab={userProfileModalState.tab}
+        onOpenSupabaseModal={() => setIsSupabaseModalOpen(true)}
       />
 
       {/* Offline Toast Indicator for PWA */}

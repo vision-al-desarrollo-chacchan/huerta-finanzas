@@ -163,9 +163,6 @@ export const IncomeView: React.FC<IncomeViewProps> = ({ onOpenIncomeModal }) => 
                           {cat.name}
                         </span>
                       )}
-                      <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">
-                        {item.scope === 'business' ? 'Empresa' : 'Personal'}
-                      </span>
                     </div>
 
                     <div className="flex items-center gap-3 text-xs text-slate-400 mt-1.5 flex-wrap">

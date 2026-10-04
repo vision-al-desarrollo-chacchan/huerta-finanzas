@@ -32,8 +32,6 @@ interface ErpContextType {
   rentals: Rental[];
   rentalPayments: RentalPayment[];
   scheduledPayments: ScheduledPayment[];
-  scope: ScopeType;
-  setScope: (scope: ScopeType) => void;
   currency: Currency;
   setCurrency: (c: Currency) => void;
 
@@ -100,7 +98,6 @@ export const ErpProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const { currentUser } = useAuth();
   const userId = currentUser?.id || 'guest';
 
-  const [scope, setScope] = useState<ScopeType>('all');
   const [currency, setCurrency] = useState<Currency>(currentUser?.defaultCurrency || 'PEN');
 
   useEffect(() => {
@@ -173,11 +170,19 @@ export const ErpProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setRentalPayments(storedRentalPayments ? JSON.parse(storedRentalPayments) : []);
         setScheduledPayments(storedScheduled ? JSON.parse(storedScheduled) : []);
       } else {
-        loadInitialSeedData();
+        if (userId === 'usr_demo_vip') {
+          loadInitialSeedData();
+        } else {
+          loadNewUserInitialData();
+        }
       }
     } catch (e) {
       console.error('Failed to load user data from storage:', e);
-      loadInitialSeedData();
+      if (userId === 'usr_demo_vip') {
+        loadInitialSeedData();
+      } else {
+        loadNewUserInitialData();
+      }
     }
   }, [userId, currentUser]);
 
@@ -610,6 +615,80 @@ export const ErpProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     saveToStorage(STORAGE_KEYS.SCHEDULED_PAYMENTS, seedScheduledPayments);
   };
 
+  const loadNewUserInitialData = () => {
+    const today = getTodayDateString();
+
+    const starterAccounts: Account[] = [
+      {
+        id: `acc_cash_${userId}`,
+        userId,
+        name: 'Efectivo / Billetera',
+        type: 'cash',
+        bankName: 'Efectivo',
+        accountNumber: 'CAJA-001',
+        initialBalance: 0,
+        balance: 0,
+        currency,
+        color: '#10b981',
+        iconName: 'Banknote',
+        isActive: true,
+        createdAt: today,
+      },
+      {
+        id: `acc_bank_${userId}`,
+        userId,
+        name: 'Cuenta Bancaria Principal',
+        type: 'savings',
+        bankName: 'Banco',
+        accountNumber: 'CTA-001',
+        initialBalance: 0,
+        balance: 0,
+        currency,
+        color: '#3b82f6',
+        iconName: 'Landmark',
+        isActive: true,
+        createdAt: today,
+      },
+      {
+        id: `acc_wallet_${userId}`,
+        userId,
+        name: 'Billetera Móvil (Yape / Plin)',
+        type: 'yape',
+        bankName: 'Móvil',
+        accountNumber: 'MOVIL-01',
+        initialBalance: 0,
+        balance: 0,
+        currency,
+        color: '#8b5cf6',
+        iconName: 'Smartphone',
+        isActive: true,
+        createdAt: today,
+      },
+    ];
+
+    const allCategories = [...DEFAULT_INCOME_CATEGORIES, ...DEFAULT_EXPENSE_CATEGORIES];
+
+    setAccounts(starterAccounts);
+    setCategories(allCategories);
+    setTransactions([]);
+    setTransfers([]);
+    setDebts([]);
+    setDebtPayments([]);
+    setRentals([]);
+    setRentalPayments([]);
+    setScheduledPayments([]);
+
+    saveToStorage(STORAGE_KEYS.ACCOUNTS, starterAccounts);
+    saveToStorage(STORAGE_KEYS.CATEGORIES, allCategories);
+    saveToStorage(STORAGE_KEYS.TRANSACTIONS, []);
+    saveToStorage(STORAGE_KEYS.TRANSFERS, []);
+    saveToStorage(STORAGE_KEYS.DEBTS, []);
+    saveToStorage(STORAGE_KEYS.DEBT_PAYMENTS, []);
+    saveToStorage(STORAGE_KEYS.RENTALS, []);
+    saveToStorage(STORAGE_KEYS.RENTAL_PAYMENTS, []);
+    saveToStorage(STORAGE_KEYS.SCHEDULED_PAYMENTS, []);
+  };
+
   // ==========================================
   // CORE AUTOMATIC BALANCE CALCULATION ENGINE
   // ==========================================
@@ -986,26 +1065,11 @@ export const ErpProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return { success: true };
   };
 
-  // FILTERED BY SCOPE (Personal / Business / All)
-  const filteredTransactions = useMemo(() => {
-    if (scope === 'all') return transactions;
-    return transactions.filter(t => t.scope === scope);
-  }, [transactions, scope]);
-
-  const filteredTransfers = useMemo(() => {
-    if (scope === 'all') return transfers;
-    return transfers.filter(t => t.scope === scope);
-  }, [transfers, scope]);
-
-  const filteredDebts = useMemo(() => {
-    if (scope === 'all') return debts;
-    return debts.filter(d => d.scope === scope);
-  }, [debts, scope]);
-
-  const filteredRentals = useMemo(() => {
-    if (scope === 'all') return rentals;
-    return rentals.filter(r => r.scope === scope);
-  }, [rentals, scope]);
+  // METRICS & COMPUTED VALUES (Directamente del usuario activo)
+  const filteredTransactions = transactions;
+  const filteredTransfers = transfers;
+  const filteredDebts = debts;
+  const filteredRentals = rentals;
 
   // COMPUTED DASHBOARD METRICS (Reales y conectados a movimientos)
   // SALDO DISPONIBLE: Suma de los saldos actuales de todas las cuentas activas
@@ -1188,7 +1252,6 @@ export const ErpProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         'Categoría': m.categoryName || '-',
         'Método': m.paymentMethod,
         'Persona / Proveedor': m.personOrCompany || '-',
-        'Ámbito': m.scope === 'business' ? 'Empresarial' : 'Personal',
       };
     });
     const wsTx = XLSX.utils.json_to_sheet(txData);
@@ -1376,8 +1439,6 @@ CREATE POLICY "Users access own rentals" ON public.rentals FOR ALL USING (auth.u
         rentals,
         rentalPayments,
         scheduledPayments,
-        scope,
-        setScope,
         currency,
         setCurrency,
 

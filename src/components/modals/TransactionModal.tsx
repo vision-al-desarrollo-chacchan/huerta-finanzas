@@ -30,7 +30,6 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
   const [personOrCompany, setPersonOrCompany] = useState<string>('');
   const [receiptNumber, setReceiptNumber] = useState<string>('');
   const [notes, setNotes] = useState<string>('');
-  const [scope, setScope] = useState<'personal' | 'business'>('business');
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
@@ -46,7 +45,6 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
       setPersonOrCompany(editItem.personOrCompany || '');
       setReceiptNumber(editItem.receiptNumber || '');
       setNotes(editItem.notes || '');
-      setScope(editItem.scope);
     } else {
       setType(defaultType);
       setAmount('');
@@ -110,7 +108,6 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
         personOrCompany: personOrCompany.trim() || undefined,
         receiptNumber: receiptNumber.trim() || undefined,
         notes: notes.trim() || undefined,
-        scope,
       });
     } else {
       addTransaction({
@@ -125,7 +122,6 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
         personOrCompany: personOrCompany.trim() || undefined,
         receiptNumber: receiptNumber.trim() || undefined,
         notes: notes.trim() || undefined,
-        scope,
       });
     }
 
@@ -215,20 +211,6 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                   className="w-full pl-3 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-lg font-bold focus:border-emerald-500 focus:outline-none"
                 />
               </div>
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">
-                Ámbito / Tipo
-              </label>
-              <select
-                value={scope}
-                onChange={e => setScope(e.target.value as 'personal' | 'business')}
-                className="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-200 text-sm focus:border-emerald-500 focus:outline-none"
-              >
-                <option value="business">Empresarial (Negocio / Empresa)</option>
-                <option value="personal">Personal (Hogar / Finanzas Propias)</option>
-              </select>
             </div>
           </div>
 

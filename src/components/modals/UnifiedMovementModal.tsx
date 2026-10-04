@@ -111,7 +111,6 @@ export const UnifiedMovementModal: React.FC<UnifiedMovementModalProps> = ({
         time: getCurrentTimeString(),
         notes: description.trim(),
         reference: receiptNumber.trim() || undefined,
-        scope: 'business',
       });
 
       if (res.success) {
@@ -139,7 +138,6 @@ export const UnifiedMovementModal: React.FC<UnifiedMovementModalProps> = ({
         description: description.trim(),
         paymentMethod: 'transferencia',
         receiptNumber: receiptNumber.trim() || undefined,
-        scope: 'business',
       });
       onClose();
     } catch (err: any) {

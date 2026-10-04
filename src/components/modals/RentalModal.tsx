@@ -22,7 +22,6 @@ export const RentalModal: React.FC<RentalModalProps> = ({
   const [counterpartName, setCounterpartName] = useState('');
   const [monthlyAmount, setMonthlyAmount] = useState('');
   const [paymentDay, setPaymentDay] = useState('5');
-  const [scope, setScope] = useState<'personal' | 'business'>('business');
   const [notes, setNotes] = useState('');
   const [error, setError] = useState('');
 
@@ -63,7 +62,6 @@ export const RentalModal: React.FC<RentalModalProps> = ({
       paymentDay: day,
       currentMonthStatus: 'pending',
       notes: notes.trim() || undefined,
-      scope,
     });
 
     onClose();
@@ -197,20 +195,6 @@ export const RentalModal: React.FC<RentalModalProps> = ({
                 onChange={e => setPaymentDay(e.target.value)}
                 className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-slate-200 text-sm focus:border-cyan-500 focus:outline-none"
               />
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">
-                Ámbito
-              </label>
-              <select
-                value={scope}
-                onChange={e => setScope(e.target.value as 'personal' | 'business')}
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-slate-200 text-sm focus:border-cyan-500 focus:outline-none"
-              >
-                <option value="business">Empresarial (Oficina/Local)</option>
-                <option value="personal">Personal (Vivienda propia)</option>
-              </select>
             </div>
           </div>
 

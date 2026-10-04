@@ -182,9 +182,6 @@ export const RentalsView: React.FC<RentalsViewProps> = ({ onOpenRentalModal }) =
                       <Calendar className="w-3.5 h-3.5 text-slate-500" />
                       Día de Pago habitual: <strong className="text-white">Día {item.paymentDay} de cada mes</strong>
                     </span>
-                    <span className="px-2 py-0.5 rounded-md bg-slate-800 text-[10px] text-slate-300">
-                      {item.scope === 'business' ? 'Empresarial' : 'Personal'}
-                    </span>
                   </div>
 
                   {item.notes && (
