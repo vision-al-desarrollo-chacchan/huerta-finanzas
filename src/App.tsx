@@ -86,7 +86,6 @@ const MainAppContent: React.FC = () => {
         <Navigation
           activeTab={activeTab}
           setActiveTab={setActiveTab}
-          onOpenMovementModal={() => handleOpenMovementModal('expense')}
         />
 
         {/* View Content */}
@@ -110,7 +109,6 @@ const MainAppContent: React.FC = () => {
 
           {activeTab === 'dashboard' && (
             <DashboardView
-              onOpenMovementModal={handleOpenMovementModal}
               onNavigateToTab={tab => setActiveTab(tab)}
             />
           )}
